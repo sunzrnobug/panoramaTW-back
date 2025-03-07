@@ -1,10 +1,10 @@
 package com.panorama.backend.controller.map;
 
-import com.JS_Nearshore.backend.DTO.InfoDTO;
-import com.JS_Nearshore.backend.model.node.LayerNode;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.service.map.RasterTileService;
-import com.JS_Nearshore.backend.service.node.LayerNodeService;
+import com.panorama.backend.DTO.InfoDTO;
+import com.panorama.backend.model.node.LayerNode;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.service.map.RasterTileService;
+import com.panorama.backend.service.node.LayerNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;

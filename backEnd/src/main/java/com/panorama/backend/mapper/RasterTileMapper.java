@@ -1,6 +1,6 @@
 package com.panorama.backend.mapper;
 
-import com.JS_Nearshore.backend.model.resource.Tile;
+import com.panorama.backend.model.resource.Tile;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

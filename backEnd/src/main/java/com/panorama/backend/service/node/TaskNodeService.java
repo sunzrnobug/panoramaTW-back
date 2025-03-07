@@ -1,7 +1,7 @@
 package com.panorama.backend.service.node;
 
-import com.JS_Nearshore.backend.model.node.TaskNode;
-import com.JS_Nearshore.backend.repository.TaskNodeRepo;
+import com.panorama.backend.model.node.TaskNode;
+import com.panorama.backend.repository.TaskNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.panorama.backend.DTO;
 
-import com.JS_Nearshore.backend.DTO.base.BaseDTO;
+import com.panorama.backend.DTO.base.BaseDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

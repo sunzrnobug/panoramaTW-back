@@ -1,8 +1,8 @@
 package com.panorama.backend.controller.node;
 
-import com.JS_Nearshore.backend.model.Constant.GenerateResultStatus;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.service.node.TaskNodeService;
+import com.panorama.backend.model.Constant.GenerateResultStatus;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.service.node.TaskNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

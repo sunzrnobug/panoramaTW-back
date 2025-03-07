@@ -1,6 +1,6 @@
 package com.panorama.backend.config;
 
-import com.JS_Nearshore.backend.model.resource.DefaultDataSource;
+import com.panorama.backend.model.resource.DefaultDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;

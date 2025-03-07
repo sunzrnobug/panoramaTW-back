@@ -1,8 +1,8 @@
 package com.panorama.backend.util;
 
-import com.JS_Nearshore.backend.model.node.ModelNode;
-import com.JS_Nearshore.backend.model.node.TaskNode;
-import com.JS_Nearshore.backend.model.resource.DefaultDataSource;
+import com.panorama.backend.model.node.ModelNode;
+import com.panorama.backend.model.node.TaskNode;
+import com.panorama.backend.model.resource.DefaultDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

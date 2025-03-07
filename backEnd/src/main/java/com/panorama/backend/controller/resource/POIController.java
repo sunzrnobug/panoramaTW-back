@@ -1,9 +1,9 @@
 package com.panorama.backend.controller.resource;
 
-import com.JS_Nearshore.backend.DTO.PoiDTO;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.model.resource.POI;
-import com.JS_Nearshore.backend.service.resource.POIService;
+import com.panorama.backend.DTO.PoiDTO;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.model.resource.POI;
+import com.panorama.backend.service.resource.POIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

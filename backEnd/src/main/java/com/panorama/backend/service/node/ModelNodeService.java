@@ -1,7 +1,7 @@
 package com.panorama.backend.service.node;
 
-import com.JS_Nearshore.backend.model.node.ModelNode;
-import com.JS_Nearshore.backend.repository.ModelNodeRepo;
+import com.panorama.backend.model.node.ModelNode;
+import com.panorama.backend.repository.ModelNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

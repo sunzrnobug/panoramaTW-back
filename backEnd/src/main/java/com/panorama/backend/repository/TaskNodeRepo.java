@@ -1,6 +1,6 @@
 package com.panorama.backend.repository;
 
-import com.JS_Nearshore.backend.model.node.TaskNode;
+import com.panorama.backend.model.node.TaskNode;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

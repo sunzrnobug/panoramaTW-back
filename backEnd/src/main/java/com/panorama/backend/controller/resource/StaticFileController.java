@@ -1,10 +1,10 @@
 package com.panorama.backend.controller.resource;
 
-import com.JS_Nearshore.backend.DTO.InfoDTO;
-import com.JS_Nearshore.backend.model.node.LayerNode;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.service.node.LayerNodeService;
-import com.JS_Nearshore.backend.service.resource.StaticFileService;
+import com.panorama.backend.DTO.InfoDTO;
+import com.panorama.backend.model.node.LayerNode;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.service.node.LayerNodeService;
+import com.panorama.backend.service.resource.StaticFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;

@@ -1,7 +1,7 @@
 package com.panorama.backend.mapper;
 
-import com.JS_Nearshore.backend.DTO.PoiDTO;
-import com.JS_Nearshore.backend.model.resource.POI;
+import com.panorama.backend.DTO.PoiDTO;
+import com.panorama.backend.model.resource.POI;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

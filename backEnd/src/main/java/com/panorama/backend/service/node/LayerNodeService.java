@@ -1,10 +1,10 @@
 package com.panorama.backend.service.node;
 
-import com.JS_Nearshore.backend.DTO.InfoDTO;
-import com.JS_Nearshore.backend.DTO.LayerNodeDTO;
-import com.JS_Nearshore.backend.model.node.LayerNode;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.repository.LayerNodeRepo;
+import com.panorama.backend.DTO.InfoDTO;
+import com.panorama.backend.DTO.LayerNodeDTO;
+import com.panorama.backend.model.node.LayerNode;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.repository.LayerNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

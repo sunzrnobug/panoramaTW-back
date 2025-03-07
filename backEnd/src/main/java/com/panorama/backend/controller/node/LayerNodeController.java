@@ -1,9 +1,9 @@
 package com.panorama.backend.controller.node;
 
-import com.JS_Nearshore.backend.DTO.InfoDTO;
-import com.JS_Nearshore.backend.DTO.LayerNodeDTO;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.service.node.LayerNodeService;
+import com.panorama.backend.DTO.InfoDTO;
+import com.panorama.backend.DTO.LayerNodeDTO;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.service.node.LayerNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

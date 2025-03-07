@@ -1,6 +1,6 @@
 package com.panorama.backend.repository;
 
-import com.JS_Nearshore.backend.model.node.LayerNode;
+import com.panorama.backend.model.node.LayerNode;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

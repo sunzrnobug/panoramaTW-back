@@ -1,10 +1,10 @@
 package com.panorama.backend.controller.map;
 
-import com.JS_Nearshore.backend.DTO.InfoDTO;
-import com.JS_Nearshore.backend.model.node.LayerNode;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.service.map.VectorTileService;
-import com.JS_Nearshore.backend.service.node.LayerNodeService;
+import com.panorama.backend.DTO.InfoDTO;
+import com.panorama.backend.model.node.LayerNode;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.service.map.VectorTileService;
+import com.panorama.backend.service.node.LayerNodeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.opengis.referencing.FactoryException;

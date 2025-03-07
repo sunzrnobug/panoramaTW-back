@@ -7,14 +7,14 @@ package com.panorama.backend.service.resource;
  * @version: 1.0
  */
 
-import com.JS_Nearshore.backend.model.Constant.TaskStatus;
-import com.JS_Nearshore.backend.model.Constant.TaskType;
-import com.JS_Nearshore.backend.model.node.LayerNode;
-import com.JS_Nearshore.backend.model.node.TaskNode;
-import com.JS_Nearshore.backend.service.node.LayerNodeService;
-import com.JS_Nearshore.backend.service.node.TaskNodeService;
-import com.JS_Nearshore.backend.util.FileUtil;
-import com.JS_Nearshore.backend.util.ProcessUtil;
+import com.panorama.backend.model.Constant.TaskStatus;
+import com.panorama.backend.model.Constant.TaskType;
+import com.panorama.backend.model.node.LayerNode;
+import com.panorama.backend.model.node.TaskNode;
+import com.panorama.backend.service.node.LayerNodeService;
+import com.panorama.backend.service.node.TaskNodeService;
+import com.panorama.backend.util.FileUtil;
+import com.panorama.backend.util.ProcessUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;

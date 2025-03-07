@@ -1,8 +1,8 @@
 package com.panorama.backend.AOP;
 
-import com.JS_Nearshore.backend.config.DataSourceContextHolder;
-import com.JS_Nearshore.backend.config.DynamicDataSource;
-import com.JS_Nearshore.backend.model.node.LayerNode;
+import com.panorama.backend.config.DataSourceContextHolder;
+import com.panorama.backend.config.DynamicDataSource;
+import com.panorama.backend.model.node.LayerNode;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -45,7 +45,7 @@ public class DynamicDataSourceAspect {
     }
 
     //切换数据源
-    @Around("@annotation(com.JS_Nearshore.backend.annotation.DynamicNodeData)")
+    @Around("@annotation(com.panorama.backend.annotation.DynamicNodeData)")
     public Object switchDataSource(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         LayerNode layerNode = (LayerNode) args[0];

@@ -1,10 +1,10 @@
 package com.panorama.backend.service.resource;
 
-import com.JS_Nearshore.backend.DTO.PoiDTO;
-import com.JS_Nearshore.backend.mapper.POIMapper;
-import com.JS_Nearshore.backend.model.Constant.GenerateResultStatus;
-import com.JS_Nearshore.backend.model.resource.GeneralResult;
-import com.JS_Nearshore.backend.model.resource.POI;
+import com.panorama.backend.DTO.PoiDTO;
+import com.panorama.backend.mapper.POIMapper;
+import com.panorama.backend.model.Constant.GenerateResultStatus;
+import com.panorama.backend.model.resource.GeneralResult;
+import com.panorama.backend.model.resource.POI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

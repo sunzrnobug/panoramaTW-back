@@ -1,7 +1,7 @@
 package com.panorama.backend.config;
 
-import com.JS_Nearshore.backend.model.node.LayerNode;
-import com.JS_Nearshore.backend.repository.LayerNodeRepo;
+import com.panorama.backend.model.node.LayerNode;
+import com.panorama.backend.repository.LayerNodeRepo;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Configuration;

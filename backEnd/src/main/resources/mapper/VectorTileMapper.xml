@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panorama.backend.mapper.VectorTileMapper">
+
+    <select id="getVectorTile" resultType="java.lang.Object">
+        WITH mvt_geom AS (
+            SELECT
+                ogc_fid,
+                <foreach collection="visualizationFieldsList" item="field" separator=",">
+                    ${field}
+                </foreach>,
+                ST_AsMVTGeom(
+                    original_table.geom,
+                    ST_TileEnvelope(#{z}, #{x}, #{y}),
+                    extent => 256, buffer => 64
+                ) AS geom
+            FROM ${tableName} AS original_table
+            WHERE ST_Intersects(original_table.geom, ST_TileEnvelope(#{z}, #{x}, #{y}))
+        )
+        SELECT ST_AsMVT(mvt_geom, '${tableName}', 256, 'geom') AS mvt
+        FROM mvt_geom;
+    </select>
+
+    <select id="getDetailInfo" resultType="map">
+        SELECT
+            <foreach collection="detailFieldsList" item="field" separator=",">
+                ${field}
+            </foreach>
+        FROM
+            "${tableName}"
+        WHERE
+            ogc_fid = #{ogc_fid}
+    </select>
+
+    <insert id="insertGeoJsonFeature">
+        INSERT INTO "${tableName}"
+        (
+            <foreach collection="properties" index="key" item="value" separator=",">
+                ${key}
+            </foreach>,
+            geom
+        )
+        VALUES
+        (
+            <foreach collection="properties" index="key" item="value" separator=",">
+                <choose>
+                    <when test="value instanceof java.util.List">
+                        #{value, typeHandler=com.JS_Nearshore.backend.handler.ArrayTypeHandler}
+                    </when>
+                    <when test="value instanceof java.util.Map">
+                        #{value, typeHandler=com.JS_Nearshore.backend.handler.JsonTypeHandler}
+                    </when>
+                    <!-- 如果是基本类型，直接插入 -->
+                    <otherwise>
+                        #{value}
+                    </otherwise>
+                </choose>
+            </foreach>,
+            ST_GeomFromGeoJSON(#{geometry})
+        )
+    </insert>
+
+    <update id="createTable">
+        CREATE TABLE IF NOT EXISTS "${tableName}" (
+            id SERIAL PRIMARY KEY,
+            <foreach collection="propertyType" item="entry" index="key" separator=",">
+                ${key} ${entry}
+            </foreach>,
+            geom GEOMETRY(${type}, ${srid})
+        );
+    </update>
+
+    <delete id="deleteTable">
+        DROP TABLE IF EXISTS "${tableName}"
+    </delete>
+
+    <select id="findSRIDByWKT" resultType="int">
+        SELECT srid
+        FROM spatial_ref_sys
+        WHERE REPLACE(srtext, ' ', '') LIKE CONCAT(SUBSTRING(#{wkt}, 1, 12), '%')
+        LIMIT 1
+    </select>
+
+    <select id="getSameCount" resultType="int">
+        SELECT COUNT(*)
+        FROM information_schema.tables
+        WHERE table_name LIKE CONCAT(#{tableName}, '%')
+    </select>
+
+</mapper>
