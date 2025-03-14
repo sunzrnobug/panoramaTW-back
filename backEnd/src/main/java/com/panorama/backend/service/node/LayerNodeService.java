@@ -30,6 +30,10 @@ public class LayerNodeService {
         return layerNodeRepo.findLayerNodeById(id);
     }
 
+    public LayerNode getLayerNodeByTableName(String tableName){
+        return layerNodeRepo.findLayerNodeByTableName(tableName);
+    }
+
     public void saveLayerNode(LayerNode layerNode){
         layerNodeRepo.save(layerNode);
     }

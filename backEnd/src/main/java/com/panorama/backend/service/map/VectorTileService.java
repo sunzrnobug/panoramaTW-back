@@ -215,6 +215,15 @@ public class VectorTileService {
         }
     }
 
+    @DynamicNodeData
+    public GeneralResult getGeojsonByTableName(LayerNode layerNode, String tableName) {
+        try {
+            return GeneralResult.builder().status(GenerateResultStatus.SUCCESS).message(vectorTileMapper.getGeojsonByTableName(tableName)).build();
+        } catch (Exception e) {
+            return GeneralResult.builder().status(GenerateResultStatus.ERROR).message("failed to get geojson").build();
+        }
+    }
+
     private Map<String, String> getDataSourceMap() {
         Map<String, String> dataSourceMap = new HashMap<>();
         dataSourceMap.put("url", defaultDataSource.getUrl());

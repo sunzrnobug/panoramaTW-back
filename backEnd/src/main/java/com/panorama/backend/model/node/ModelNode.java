@@ -22,6 +22,7 @@ public class ModelNode {
     private String name;
     private String program;
     private List<String> paramKey;
+    private List<String> output;
     private String exePrefix;
     private String condaEnv;
 }

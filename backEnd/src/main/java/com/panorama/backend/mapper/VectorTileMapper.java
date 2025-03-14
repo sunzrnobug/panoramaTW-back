@@ -27,4 +27,6 @@ public interface VectorTileMapper {
 
     int getSameCount(String tableName);
 
+    String getGeojsonByTableName(String tableName);
+
 }

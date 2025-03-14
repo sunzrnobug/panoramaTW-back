@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,6 +46,24 @@ public class JsonUtil {
 
     public static JsonNode mapToJson(Map<?,?> map){
         return objectMapper.valueToTree(map);
+    }
+
+    public static String toJsonString(Object json) {
+        if (null == json) return "";
+
+        String jsonStr = "";
+
+        // JSONObject,JSONArray 都实现了JSON接口
+        Map<String, String> map = new HashMap<>(1);
+        map.put("JSON", json.toString());
+        try {
+            jsonStr = objectMapper.writeValueAsString(map.get("JSON"));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
+        }
+
+        return jsonStr;
     }
 
     public static <T> T jsonToObject(String json, Class<T> clazz) throws IOException {
