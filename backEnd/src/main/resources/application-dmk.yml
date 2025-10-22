@@ -19,7 +19,11 @@ spring:
       max-request-size: 1GB
 
 path:
+<<<<<<< Updated upstream
   script: H:\data\panoramaTW\script\
+=======
+  script: /data/panoramaTW/script/
+>>>>>>> Stashed changes
   temp: H:\data\nearshore\temp
   rasterTile: H:\data\nearshore\raster\rasterTile
   rasterFile: H:\data\nearshore\raster\rasterFile

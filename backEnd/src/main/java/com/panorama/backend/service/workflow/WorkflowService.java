@@ -33,9 +33,12 @@ public class WorkflowService {
     @Value("${path.script}")
     private String scriptPath;
 
+<<<<<<< Updated upstream
     @Value("${path.temp}")
     private String tempPath;
 
+=======
+>>>>>>> Stashed changes
     @Autowired
     public WorkflowService(VectorTileService vectorTileService, LayerNodeService layerNodeService) {
         this.vectorTileService = vectorTileService;
@@ -135,6 +138,10 @@ public class WorkflowService {
 
     // 执行Python脚本
     public String callPythonScript(String modelName, Map<String, Object> params) throws Exception {
+<<<<<<< Updated upstream
+=======
+//        String pythonScript = "H:\\data\\panoramaTW\\script\\" + modelName + ".py";
+>>>>>>> Stashed changes
         String pythonScript = scriptPath + modelName + ".py";
 
         // 构造命令参数列表
@@ -142,8 +149,18 @@ public class WorkflowService {
 //        command.add("cmd.exe");
 //        command.add("/c");
 //        command.add("conda activate bankModel &&");
+<<<<<<< Updated upstream
         command.add("python");
 //        command.add("F:\\App\\anaconda3\\envs\\bankModel\\python.exe");
+=======
+//        command.add("python");
+//        command.add("F:\\App\\anaconda3\\envs\\bankModel\\python.exe");
+        command.add("conda");
+        command.add("run");
+        command.add("-n");
+        command.add("bankModel");
+        command.add("python");
+>>>>>>> Stashed changes
         command.add(pythonScript);
 
         for (Map.Entry<String, Object> entry : params.entrySet()) {
