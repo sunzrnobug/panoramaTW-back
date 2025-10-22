@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * @author: DMK
  * @description:
@@ -29,8 +31,8 @@ public class WorkflowController {
     @PostMapping("/execute")
     public ResponseEntity<?> executeWorkflow(@RequestBody String jsonInput) {
         try {
-            workflowService.executeWorkflow(jsonInput);
-            return ResponseEntity.ok("工作流执行完成");
+            Map<String, Object> results = workflowService.executeWorkflow(jsonInput);
+            return ResponseEntity.ok(results);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("执行失败: " + e.getMessage());
         }

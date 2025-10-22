@@ -88,8 +88,8 @@ public class RasterTileService {
             if (type.equals("land_gdal")){
                 int y_new = (int) (Math.pow(2, z) - 1.0 - y);
                 specific_rasterTile_path = String.join(File.separator, url, layerNode.getTableName(), String.valueOf(z), String.valueOf(x), y_new + ".png");
-            }else if (type.equals("land") || type.equals("water")){
-                specific_rasterTile_path = String.join(File.separator, url, layerNode.getTableName(), String.valueOf(z), x + "-" + y + "-" + z + ".png");
+            }else if (type.equals("land")) {
+                specific_rasterTile_path = String.join(File.separator, url, layerNode.getTableName(), String.valueOf(z), String.valueOf(x), y + ".png");
             }
             File rasterTile = new File(specific_rasterTile_path);
             // 检查文件是否存在

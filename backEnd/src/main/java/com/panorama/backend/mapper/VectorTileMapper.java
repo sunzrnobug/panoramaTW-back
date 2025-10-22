@@ -17,7 +17,7 @@ public interface VectorTileMapper {
 
     Map<String, Object> getDetailInfo(String tableName, int ogc_fid, String[] detailFieldsList);
 
-    void insertGeoJsonFeature(String tableName, String geometry, Map<String, Object> properties);
+    void insertGeoJsonFeature(String tableName, String geometry, int srid, Map<String, Object> properties);
 
     void createTable(String tableName, Map<String, Object> propertyType, String type, int srid);
 

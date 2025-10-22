@@ -30,6 +30,14 @@ public class JsonUtil {
         return objectMapper.writeValueAsString(object);
     }
 
+    public static Map<String, Object> jsonToMap(String jsonStr) {
+        try {
+            return objectMapper.readValue(jsonStr, new TypeReference<Map<String, Object>>() {});
+        } catch (Exception e) {
+            throw new RuntimeException("JSON解析失败", e);
+        }
+    }
+
     public static ObjectNode getObjectNode() {
         return objectMapper.createObjectNode();
     }

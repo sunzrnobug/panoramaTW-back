@@ -6,11 +6,11 @@ spring:
     mongodb:
       database: panoramaTW
       authentication-database: admin
-      uri: mongodb://localhost:27017/panoramaTW
+      uri: mongodb://mongo:27017/panoramaTW
   datasource:
     default:
       driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://localhost:5432/panoramaTW
+      url: jdbc:postgresql://pg:5432/panoramaTW
       username: postgres
       password: 123456
   servlet:
@@ -19,8 +19,8 @@ spring:
       max-request-size: 1GB
 
 path:
-  script: H:\data\panoramaTW\script\
-  temp: H:\data\nearshore\temp
+  script: /data/panoramaTW/script/
+  temp: /data/panoramaTW/temp
   rasterTile: H:\data\nearshore\raster\rasterTile
   rasterFile: H:\data\nearshore\raster\rasterFile
   static: H:\data\nearshore\static

@@ -11,10 +11,10 @@ import com.panorama.backend.service.node.LayerNodeService;
 import com.panorama.backend.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -30,13 +30,19 @@ public class WorkflowService {
     private final VectorTileService vectorTileService;
     private final LayerNodeService layerNodeService;
 
+    @Value("${path.script}")
+    private String scriptPath;
+
+    @Value("${path.temp}")
+    private String tempPath;
+
     @Autowired
     public WorkflowService(VectorTileService vectorTileService, LayerNodeService layerNodeService) {
         this.vectorTileService = vectorTileService;
         this.layerNodeService = layerNodeService;
     }
 
-    public void executeWorkflow(String jsonInput) throws Exception {
+    public Map<String, Object> executeWorkflow(String jsonInput) throws Exception {
         // 解析 JSON
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(jsonInput);
@@ -55,22 +61,23 @@ public class WorkflowService {
         }
 
         // 按拓扑顺序执行
-        Map<String, String> results = new HashMap<>();
+        Map<String, Object> results = new HashMap<>();
         for (WorkflowNode node : nodes) {
             executeNode(node, edges, results);
         }
         System.out.println("Workflow execution completed.");
         System.out.println("Results: " + results);
+        return results;
     }
 
-    private void executeNode(WorkflowNode node, List<WorkflowEdge> edges, Map<String, String> results) throws Exception {
+    private void executeNode(WorkflowNode node, List<WorkflowEdge> edges, Map<String, Object> results) throws Exception {
         Map<String, Object> params = node.getParams();
 
         // 替换输入参数
         for (WorkflowEdge edge : edges) {
             if (edge.getEnd_node().equals(node.getNode_id())) {
                 for (Map.Entry<String, String> entry : edge.getMap().entrySet()) {
-                    String previousOutput = results.get(entry.getKey());
+                    Map<String, Object> previousOutput = (Map<String, Object>) results.get(entry.getKey());
                     params.put(entry.getValue(), previousOutput);
                 }
             }
@@ -88,45 +95,57 @@ public class WorkflowService {
                         throw new Exception("Failed to get GeoJSON from table " + tableName);
                     }
                     String geojson = (String) geojsonResult.getMessage();
-                    params.put(entry.getKey(), geojson); // 替换参数
+                    Map<String, Object> geojsonMap = JsonUtil.jsonToMap(geojson);
+                    params.put(entry.getKey(), geojsonMap); // 替换参数
                 }
+            }
+        }
+
+        // 处理 GeoJSON 转文件逻辑
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            if (entry.getValue() instanceof Map) {
+                String jsonString = JsonUtil.serializeObject(entry.getValue());
+                String filePath = writeGeoJsonToFile(jsonString);
+                params.put(entry.getKey(), filePath); // 替换为文件路径
             }
         }
         System.out.println(params);
         // 执行 Python 脚本
         String result = callPythonScript(node.getModel_name(), params);
+        Map<String, Object> resultMap = JsonUtil.jsonToMap(result);
         // 记录执行结果
         for (String outputKey : node.getOutput()) {
-            results.put(outputKey, result);
+            results.put(outputKey, resultMap);
         }
     }
 
+    // 写入 GeoJSON 文件
+    private String writeGeoJsonToFile(String geoJson) throws IOException {
+        String filePrefix = tempPath;
+        File directory = new File(filePrefix);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        File tempFile = File.createTempFile("geojson_", ".geojson", directory);
+        try (FileWriter writer = new FileWriter(tempFile)) {
+            writer.write(geoJson);
+        }
+        return tempFile.getAbsolutePath();
+    }
+
+    // 执行Python脚本
     public String callPythonScript(String modelName, Map<String, Object> params) throws Exception {
-        String pythonScript = "H:\\data\\panoramaTW\\script\\" + modelName + ".py";
+        String pythonScript = scriptPath + modelName + ".py";
 
         // 构造命令参数列表
         List<String> command = new ArrayList<>();
 //        command.add("cmd.exe");
 //        command.add("/c");
 //        command.add("conda activate bankModel &&");
-//        command.add("python");
-        command.add("F:\\App\\anaconda3\\envs\\bankModel\\python.exe");
+        command.add("python");
+//        command.add("F:\\App\\anaconda3\\envs\\bankModel\\python.exe");
         command.add(pythonScript);
 
-//        JsonNode paramsJson = JsonUtil.mapToJson(params);
-//        // 遍历 params，转换为 `--key value` 形式
-//        paramsJson.fields().forEachRemaining(entry -> {
-//            command.add("--" + entry.getKey()); // 添加参数名，例如 `--buffer_distance`
-//            if (entry.getValue().isNumber()){
-//                command.add(String.valueOf(entry.getValue()));
-//            }else {
-//                JsonNode valueNode = entry.getValue();
-//                // 输出原始 JSON 值
-//                System.out.println(JsonUtil.toJsonString(valueNode));
-//                // 确保值按 JSON 形式存入命令
-//                command.add(JsonUtil.toJsonString(valueNode));
-//            }
-//        });
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             command.add("--" + entry.getKey()); // 添加参数名，例如 --buffer_distance
             command.add(JsonUtil.serializeObject(entry.getValue()));

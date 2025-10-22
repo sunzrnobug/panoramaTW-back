@@ -95,7 +95,7 @@ public class VectorTileService {
             //插入每个要素
             for (JsonNode feature : features) {
                 String geometry = feature.get("geometry").toString();
-                vectorTileMapper.insertGeoJsonFeature(uniqueTableName, geometry, JsonUtil.jsonToMap(feature.get("properties")));
+                vectorTileMapper.insertGeoJsonFeature(uniqueTableName, geometry, Integer.parseInt(infoDTO.getUsage().get("srid")), JsonUtil.jsonToMap(feature.get("properties")));
             }
 
             String path = layerNodeService.getNodePath(parentNode);

@@ -7,19 +7,18 @@
     <select id="getVectorTile" resultType="java.lang.Object">
         WITH mvt_geom AS (
             SELECT
-                ogc_fid,
                 <foreach collection="visualizationFieldsList" item="field" separator=",">
                     ${field}
                 </foreach>,
                 ST_AsMVTGeom(
-                    original_table.geom,
+                    ST_Transform(original_table.geom, 3857), -- 先转换为 3857
                     ST_TileEnvelope(#{z}, #{x}, #{y}),
-                    extent => 256, buffer => 64
+                    extent => 4096, buffer => 256
                 ) AS geom
             FROM ${tableName} AS original_table
-            WHERE ST_Intersects(original_table.geom, ST_TileEnvelope(#{z}, #{x}, #{y}))
+            WHERE ST_Intersects(ST_Transform(original_table.geom, 3857), ST_TileEnvelope(#{z}, #{x}, #{y}))
         )
-        SELECT ST_AsMVT(mvt_geom, '${tableName}', 256, 'geom') AS mvt
+        SELECT ST_AsMVT(mvt_geom, '${tableName}', 4096, 'geom') AS mvt
         FROM mvt_geom;
     </select>
 
@@ -58,7 +57,7 @@
                     </otherwise>
                 </choose>
             </foreach>,
-            ST_GeomFromGeoJSON(#{geometry})
+            ST_SetSRID(ST_GeomFromGeoJSON(#{geometry}), #{srid})
         )
     </insert>
 
